@@ -1,0 +1,3 @@
+export const dynamic='force-dynamic';
+import type {MetadataRoute} from 'next';import {db} from '@/lib/db';
+export default async function sitemap():Promise<MetadataRoute.Sitemap>{const base=process.env.SITE_URL||'https://example.com';const paths=['','services','about','contact','book','blog','pharmacy','faq','privacy','terms','cookies'];try{const [services,posts]=await Promise.all([db()`select slug from services where active=true`,db()`select slug from posts where published=true`]);paths.push(...services.map(s=>'services/'+s.slug),...posts.map(p=>'blog/'+p.slug))}catch{}return paths.map(x=>({url:base+'/'+x}))}

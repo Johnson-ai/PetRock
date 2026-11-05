@@ -1,0 +1,5 @@
+import {ContentImage} from '@/components/Content';
+import {pageMetadata} from '@/lib/content';
+import {Text} from '@/components/Content';
+import {ManagedLink as Link} from '@/components/Content';import {db} from '@/lib/db';export const dynamic='force-dynamic';export async function generateMetadata(){return pageMetadata('blog','Pet journal')};
+export default async function Blog(){const posts=await db()`select slug,title,excerpt,category,created_at from posts where published=true order by created_at desc`;return <main className="page"><div className="eyebrow"><Text id="blog.page.tsx.1"/></div><h1><Text id="blog.page.tsx.2"/></h1><p className="lede"><Text id="blog.page.tsx.3"/></p>{posts.length?<div className="serviceGrid">{posts.map(p=><Link href={'/blog/'+p.slug} className="serviceCard" key={p.slug}><ContentImage slot={"post-"+p.slug} className="detailImage"/><div className="eyebrow">{p.category}</div><h3>{p.title}</h3><p>{p.excerpt}</p><span><Text id="blog.page.tsx.4"/></span></Link>)}</div>:<div className="infoCard"><h2><Text id="blog.page.tsx.5"/></h2><p><Text id="blog.page.tsx.6"/></p></div>}</main>}

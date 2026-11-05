@@ -1,0 +1,3 @@
+import postgres from 'postgres';import {randomBytes,scryptSync} from 'node:crypto';
+const {DATABASE_URL,ADMIN_EMAIL,ADMIN_PASSWORD}=process.env;if(!DATABASE_URL||!ADMIN_EMAIL||!ADMIN_PASSWORD||ADMIN_PASSWORD.length<12)throw Error('Set DATABASE_URL, ADMIN_EMAIL and ADMIN_PASSWORD (12+ chars)');
+const salt=randomBytes(16).toString('hex');const hash='scrypt:'+salt+':'+scryptSync(ADMIN_PASSWORD,salt,64).toString('hex');const sql=postgres(DATABASE_URL,{max:1});try{await sql`insert into admins(email,password_hash,role) values(${ADMIN_EMAIL.toLowerCase()},${hash},'owner') on conflict(email) do update set password_hash=excluded.password_hash`;console.log('Owner account created. Remove ADMIN_PASSWORD from your shell history/environment.');}finally{await sql.end()}

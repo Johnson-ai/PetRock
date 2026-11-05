@@ -1,0 +1,18 @@
+# Production launch checklist
+- [ ] `npm install`, `npm run typecheck`, `npm run build`, `npm test` pass on the exact deployment commit.
+- [ ] Production database initialized and backup/restore tested.
+- [ ] Vercel environment variables configured securely; no real secrets in repository or ZIP.
+- [ ] Owner account created with strong unique password; login/logout/12-hour expiry tested.
+- [ ] Five incorrect logins cause 15-minute lockout; unauthorized admin API calls rejected.
+- [ ] Admin pages cannot be accessed by changing URLs or by non-admin sessions.
+- [ ] Create/edit/delete posts and products; update services and settings; verify changes publicly.
+- [ ] Submit appointment and contact enquiries; verify admin receives and can update statuses.
+- [ ] Test rate limits, invalid payloads, CSRF origin rejection, mobile responsiveness and keyboard navigation.
+- [ ] Verify live domain, HTTPS, CSP, HSTS and no credential leakage.
+- [ ] Replace draft privacy/terms/cookie policies with business-approved legal text.
+- [ ] Enter verified clinic address, phone, hours, services, prices, and emergency availability.
+- [ ] Confirm clinical claims and any veterinary pharmacy/telehealth compliance obligations.
+- [ ] Set data retention, deletion request, incident response and operational access procedures.
+- [ ] Review Vercel and Neon plan terms, quotas, costs and alerting.
+- [ ] Arrange production monitoring, database backups, and notification workflow.
+- [ ] Obtain client approval of content and launch.

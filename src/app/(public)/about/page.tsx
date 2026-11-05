@@ -1,0 +1,4 @@
+import {ContentImage} from '@/components/Content';
+import {pageMetadata} from '@/lib/content';
+import {Text} from '@/components/Content';
+import {ManagedLink as Link} from '@/components/Content';export async function generateMetadata(){return pageMetadata('about','About us')};export default function About(){return <main className="page"><div className="eyebrow"><Text id="about.page.tsx.1"/></div><h1><Text id="about.page.tsx.2"/></h1><p className="lede"><Text id="about.page.tsx.3"/></p><div className="splitFeature"><div className="featureIllustration"><ContentImage slot="hero"/></div><div><h2><Text id="about.page.tsx.4"/></h2><p><Text id="about.page.tsx.5"/></p><p><Text id="about.page.tsx.6"/></p><Link cmsId="link.about.page.1.href" href="/book" className="btn"><Text id="about.page.tsx.7"/></Link></div></div></main>}

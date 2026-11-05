@@ -1,0 +1,3 @@
+import {z} from 'zod';
+export const enquirySchema=z.object({kind:z.enum(['appointment','contact']),full_name:z.string().trim().min(2).max(120),email:z.email().max(254),phone:z.string().trim().min(7).max(30),pet_name:z.string().trim().max(100).optional().default(''),service:z.string().trim().max(80).optional().default(''),message:z.string().trim().max(2000).optional().default(''),preferred_date:z.iso.date().optional().or(z.literal('')),preferred_time:z.string().max(30).optional().default(''),website:z.string().optional()});
+export const loginSchema=z.object({email:z.email(),password:z.string().min(1).max(256)});

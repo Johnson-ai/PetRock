@@ -1,0 +1,1 @@
+import {NextResponse} from 'next/server';import {checkOrigin,clearSession} from '@/lib/auth';export async function POST(){if(!await checkOrigin())return NextResponse.json({error:'Invalid origin'},{status:403});await clearSession();return NextResponse.json({ok:true})}

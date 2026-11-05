@@ -1,0 +1,4 @@
+import {pageMetadata} from '@/lib/content';
+import {Text} from '@/components/Content';
+import {ManagedLink as Link} from '@/components/Content';import {db} from '@/lib/db';export const dynamic='force-dynamic';export async function generateMetadata(){return pageMetadata('services','Veterinary services')};
+export default async function Services(){const services=await db()`select slug,title,summary,price from services where active=true order by sort_order,title`;return <main className="page"><div className="eyebrow"><Text id="services.page.tsx.1"/></div><h1><Text id="services.page.tsx.2"/></h1><p className="lede"><Text id="services.page.tsx.3"/></p><div className="serviceGrid">{services.map(s=><Link className="serviceCard" href={'/services/'+s.slug} key={s.slug}><div className="serviceIcon">✳</div><h3>{s.title}</h3><p>{s.summary}</p><span>{s.price}<Text id="services.page.tsx.4"/></span></Link>)}</div></main>}

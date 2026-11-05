@@ -1,0 +1,6 @@
+import {pageMetadata} from '@/lib/content';
+import {ContentImage} from '@/components/Content';
+import {Text} from '@/components/Content';
+import {db} from '@/lib/db';import {notFound} from 'next/navigation';import {ManagedLink as Link} from '@/components/Content';export async function generateMetadata({params}:{params:Promise<{slug:string}>}){const {slug}=await params;const rows=await db()`select title,excerpt from posts where slug=${slug} and published=true`;if(!rows.length)return {};return {...await pageMetadata('post-'+slug,rows[0].title)}}
+export const dynamic='force-dynamic';
+export default async function Post({params}:{params:Promise<{slug:string}>}){const {slug}=await params;const rows=await db()`select * from posts where slug=${slug} and published=true`;if(!rows.length)notFound();const p=rows[0];return <main className="page article"><div className="eyebrow">{p.category} · {new Date(p.created_at).toLocaleDateString('en-NG',{dateStyle:'long'})}</div><h1>{p.title}</h1><ContentImage slot={"post-"+p.slug} className="detailImage"/><p className="lede">{p.excerpt}</p><div className="articleBody">{String(p.body).split(/\n\n+/).map((t:string,i:number)=><p key={i}>{t}</p>)}</div><Link cmsId="link.blog.[slug].page.1.href" href="/blog" className="subtleLink"><Text id="blog.slug.page.tsx.1"/></Link></main>}

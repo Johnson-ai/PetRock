@@ -1,0 +1,12 @@
+# Security notes
+- All admin operations require a valid server-side session; settings require owner role.
+- Passwords are scrypt-hashed with per-user salt; login locks after five failed attempts for 15 minutes.
+- Admin session tokens are random, stored as SHA-256 hashes in the database, and expire after 12 hours.
+- Cookies are HttpOnly, SameSite=Lax, Secure in production. State-changing requests enforce same-origin checks.
+- Enquiry submission is rate-limited in PostgreSQL and uses Zod validation, length checks, and a honeypot.
+- SQL uses parameterized queries. Articles are rendered as React text, never as raw HTML.
+- Content Security Policy uses unsafe-inline for Next.js compatibility; review and strengthen with nonce-based CSP before high-security deployment.
+- No upload endpoint or payment processing is included. If these are added, add file validation and payment verification before launch.
+- Database access should use encrypted connections and least-privilege credentials. Set backup and recovery procedures with the hosting provider.
+- Admin actions are audited. Logs and database records must be subject to retention/deletion procedures.
+- Do not claim this has passed an external penetration test. Test against OWASP ASVS and use a production security scanner before launch.

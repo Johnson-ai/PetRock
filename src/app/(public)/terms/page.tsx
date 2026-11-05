@@ -1,0 +1,3 @@
+import {pageMetadata} from '@/lib/content';
+import {Text} from '@/components/Content';
+export async function generateMetadata(){return pageMetadata('terms','Terms of use')};export default function Page(){return <main className="page article"><div className="eyebrow"><Text id="terms.page.tsx.1"/></div><h1><Text id="terms.page.tsx.2"/></h1><p className="lede"><Text id="terms.page.tsx.3"/></p></main>}

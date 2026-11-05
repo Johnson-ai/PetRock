@@ -1,0 +1,9 @@
+import {FloatingWhatsApp, FooterClinicDetails} from '@/components/PublicContactTools';
+export const dynamic='force-dynamic';
+import {pageMetadata} from '@/lib/content';
+export async function generateMetadata(){return pageMetadata('home','PetRock Veterinary | Care for Every Companion')}
+import {Text} from '@/components/Content';
+import {ManagedLink as Link} from '@/components/Content';
+import {ContentProvider,ContentLinks} from '@/components/Content';
+import {publicContent} from '@/lib/content';
+export default async function PublicLayout({children}:{children:React.ReactNode}){const content=await publicContent();return <ContentProvider values={content}><a className="skipLink" href="#main-content">Skip to content</a><div className="publicSite">{content.announcement&&<div className="utility">{content.announcement}</div>}<div className="utility"><Text id="layout.tsx.1"/><span><Text id="layout.tsx.2"/></span></div><header className="top"><Link cmsId="link.layout.1.href" href="/" className="brand"><span className="brandIcon">✦</span><span><Text id="layout.tsx.3"/><small><Text id="layout.tsx.4"/></small></span></Link><nav aria-label="Main navigation"><ContentLinks area="navigation"/></nav><Link className="btn small" cmsId="link.layout.2.href" href="/book"><Text id="layout.tsx.10"/></Link></header><div id="main-content">{children}</div><footer><div><Link className="brand footbrand" cmsId="link.layout.3.href" href="/"><span className="brandIcon">✦</span><span><Text id="layout.tsx.11"/><small><Text id="layout.tsx.12"/></small></span></Link><p><Text id="layout.tsx.13"/></p><FooterClinicDetails/></div><div><strong><Text id="layout.tsx.14"/></strong><ContentLinks area="footer.explore"/></div><div><strong><Text id="layout.tsx.19"/></strong><ContentLinks area="footer.information"/></div><div className="copyright">© {new Date().getFullYear()}<Text id="layout.tsx.24"/></div></footer><FloatingWhatsApp/></div></ContentProvider>}
